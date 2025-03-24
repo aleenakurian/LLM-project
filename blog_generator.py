@@ -1,11 +1,7 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
 import getpass
 import os
+
+
 #Load the LLM using API key - (eg:OpenAI)
 if not os.environ.get("OPENAI_API_KEY"):
   os.environ["OPENAI_API_KEY"] = getpass.getpass("Enter API key for OpenAI: ")
@@ -13,9 +9,6 @@ if not os.environ.get("OPENAI_API_KEY"):
 from langchain.chat_models import init_chat_model
 
 llm = init_chat_model("gpt-4o-mini", model_provider="openai")
-
-
-# In[1]:
 
 
 #Research Agent
@@ -26,18 +19,12 @@ class ResearchAgent:
         return response.generations[0].text.strip()
 
 
-# In[ ]:
-
-
 #Content Planning Agent
 class ContentPlanningAgent:
     def create_outline(self, topic):
         query = f"Create a detailed blog outline for the topic: {topic}"
         response = llm.generate([query])
         return response.generations[0].text.strip()
-
-
-# In[ ]:
 
 
 #Content Generation Agent
@@ -48,9 +35,6 @@ class ContentGenerationAgent:
         return response.generations[0].text.strip()
 
 
-# In[ ]:
-
-
 #SEO Optimization Agent
 class SEOOptimizationAgent:
     def optimize_content(self, content):
@@ -58,19 +42,12 @@ class SEOOptimizationAgent:
         response = llm.generate([query])
         return response.generations[0].text.strip()
 
-
-# In[ ]:
-
-
 #Review Agent
 class ReviewAgent:
     def review_blog(self, content):
         query = f"Proofread this blog and humanize it: {content}"
         response = llm.generate([query])
         return response.generations[0].text.strip()
-
-
-# In[ ]:
 
 
 #Main function containing calls to each agent
